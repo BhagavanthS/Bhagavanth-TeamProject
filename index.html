@@ -3,76 +3,490 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CogniGrade Pro • Early Academic Intervention Suite</title>
+  <title>CogniGrade Pro • Student Performance & Mentorship Suite</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
-    :root { --bg:#030712; --glass-surface:rgba(255,255,255,0.04); --glass-border:rgba(255,255,255,0.12); --glass-spec:rgba(255,255,255,0.35); --green:#00f5a0; --cyan:#00f2fe; --amber:#f6d365; --text-pri:#f9fafb; --text-sec:#9ca3af; }
-    * { box-sizing:border-box; margin:0; padding:0; font-family:'Plus Jakarta Sans',sans-serif; }
-    body { background:var(--bg); color:var(--text-pri); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:32px 24px; position:relative; }
-    .orb-canvas { position:fixed; inset:0; pointer-events:none; z-index:0; }
-    .orb { position:absolute; border-radius:50%; filter:blur(120px); opacity:0.5; }
-    .orb-1 { width:600px; height:600px; background:radial-gradient(circle,#00f2fe,#7928ca); top:-200px; left:-150px; }
-    .orb-2 { width:550px; height:550px; background:radial-gradient(circle,#38ef7d,#11998e); bottom:-150px; right:-150px; }
-    .app-viewport { width:100%; max-width:1200px; position:relative; z-index:1; display:flex; flex-direction:column; gap:20px; }
-    .glass-header { background:var(--glass-surface); backdrop-filter:blur(40px); border:1px solid var(--glass-border); border-radius:24px; padding:20px 28px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 20px 50px rgba(0,0,0,0.5), inset 0 1px 1px var(--glass-spec); }
-    .brand { display:flex; align-items:center; gap:14px; }
-    .logo-badge { width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg,#00f2fe,#7928ca); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:1.25rem; }
-    .kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
-    .kpi-card { background:var(--glass-surface); backdrop-filter:blur(35px); border:1px solid var(--glass-border); border-radius:20px; padding:24px; }
-    .kpi-card h3 { font-size:0.8rem; text-transform:uppercase; color:var(--text-sec); margin-bottom:8px; }
-    .kpi-card .number { font-size:2.2rem; font-weight:800; }
-    .app-workspace { display:grid; grid-template-columns:1.2fr 0.8fr; gap:20px; }
-    @media(max-width:900px){ .app-workspace { grid-template-columns:1fr; } }
-    .panel { background:var(--glass-surface); backdrop-filter:blur(35px); border:1px solid var(--glass-border); border-radius:24px; padding:28px; display:flex; flex-direction:column; gap:20px; }
-    .glass-input { background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:14px; padding:14px 18px; color:#fff; font-size:0.92rem; outline:none; }
-    .btn-liquid { background:linear-gradient(135deg,#00f2fe,#4facfe); color:#030712; border:none; border-radius:14px; padding:14px 24px; font-weight:700; cursor:pointer; }
-    .stream-feed { background:rgba(0,0,0,0.5); border:1px solid var(--glass-border); border-radius:16px; padding:16px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; max-height:280px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; }
+    :root {
+      --bg: #030712;
+      --glass-surface: rgba(255, 255, 255, 0.04);
+      --glass-surface-hover: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-specular: rgba(255, 255, 255, 0.35);
+      --cyan: #00f2fe;
+      --indigo: #4facfe;
+      --magenta: #f355da;
+      --green: #00f5a0;
+      --amber: #f6d365;
+      --red: #ff5252;
+      --text-pri: #f9fafb;
+      --text-sec: #9ca3af;
+      --blur: 40px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-pri);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ====== LIQUID GLOW CAUSTICS ====== */
+    .orb-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.55; animation: floatMotion 22s infinite alternate ease-in-out; }
+    .orb-1 { width: 620px; height: 620px; background: radial-gradient(circle, #00f2fe, #4facfe); top: -200px; left: -150px; }
+    .orb-2 { width: 580px; height: 580px; background: radial-gradient(circle, #7928ca, #ff0080); bottom: -180px; right: -150px; animation-duration: 26s; }
+    .orb-3 { width: 450px; height: 450px; background: radial-gradient(circle, #00f5a0, #0072ff); top: 35%; left: 35%; animation-duration: 18s; }
+    @keyframes floatMotion {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.08); }
+      100% { transform: translate(-50px, 60px) scale(0.96); }
+    }
+
+    .app-shell { width: 100%; max-width: 1280px; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px; }
+
+    /* ====== GLASS HEADER ====== */
+    .glass-header {
+      background: var(--glass-surface);
+      backdrop-filter: blur(var(--blur)) saturate(190%);
+      -webkit-backdrop-filter: blur(var(--blur)) saturate(190%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 18px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 1px var(--glass-specular);
+    }
+    .brand-wrap { display: flex; align-items: center; gap: 14px; }
+    .brand-badge {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: #030712; font-size: 1.25rem;
+      box-shadow: 0 0 24px rgba(0, 242, 254, 0.45);
+    }
+    .brand-wrap h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+    .brand-wrap p { font-size: 0.74rem; color: var(--text-sec); }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .pill-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .pill-btn:hover { background: rgba(255,255,255,0.12); border-color: var(--cyan); }
+
+    /* ====== KPI METRICS ====== */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .kpi-card {
+      background: var(--glass-surface);
+      backdrop-filter: blur(35px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .kpi-card:hover { transform: translateY(-3px); border-color: var(--glass-specular); }
+    .kpi-card h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-sec); margin-bottom: 6px; }
+    .kpi-card .val { font-size: 2rem; font-weight: 800; letter-spacing: -0.03em; }
+
+    /* ====== TABBED NAVIGATION ====== */
+    .tab-bar {
+      display: flex; gap: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 6px;
+      backdrop-filter: blur(25px);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-sec);
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--glass-specular);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    /* ====== SECTIONS & WORKSPACES ====== */
+    .view-panel { display: none; flex-direction: column; gap: 20px; }
+    .view-panel.active { display: flex; }
+
+    .glass-box {
+      background: var(--glass-surface);
+      backdrop-filter: blur(35px);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .section-title {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .section-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .section-title span { font-size: 0.78rem; color: var(--text-sec); }
+
+    /* Search Bar Layout */
+    .search-row { display: flex; gap: 12px; margin-bottom: 20px; }
+    .glass-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .glass-input:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,242,254,0.3); }
+    
+    .liquid-btn {
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      color: #030712;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 28px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(0, 242, 254, 0.35);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .liquid-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0, 242, 254, 0.55); filter: brightness(1.08); }
+
+    /* ====== STUDENT RESULT CARD ====== */
+    .student-dossier {
+      display: none;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    @media(max-width: 860px) { .student-dossier { grid-template-columns: 1fr; } }
+
+    .sub-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .marks-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .marks-table th {
+      text-align: left;
+      padding: 10px 12px;
+      color: var(--text-sec);
+      border-bottom: 1px solid var(--glass-border);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+    .marks-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .status-banner {
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .status-danger { background: rgba(255, 82, 82, 0.12); border: 1px solid var(--red); color: #ff7676; }
+    .status-ok { background: rgba(0, 245, 160, 0.12); border: 1px solid var(--green); color: var(--green); }
+
+    /* ====== FACULTY DIRECTORY & CARDS ====== */
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .faculty-tile {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.25s;
+    }
+    .faculty-tile:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--glass-specular);
+      transform: translateY(-2px);
+    }
+    .fac-exp-tag {
+      align-self: flex-start;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(0, 242, 254, 0.12);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Allocations Table */
+    .alloc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .alloc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
-  <div class="orb-canvas"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
-  <div class="app-viewport">
+
+  <div class="orb-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-shell">
+    
+    <!-- Top Glass Header -->
     <header class="glass-header">
-      <div class="brand">
-        <div class="logo-badge">CG</div>
-        <div><h1>CogniGrade Pro • Academic Analytics</h1><p>GPA Risk Modeling & Early Intervention Triggers</p></div>
+      <div class="brand-wrap">
+        <div class="brand-badge">CG</div>
+        <div>
+          <h1>CogniGrade Pro • Student Performance Suite</h1>
+          <p>Academic Risk Modeling & Faculty Mentorship Allocation System</p>
+        </div>
       </div>
-      <div style="color:var(--green); font-weight:700; font-size:0.85rem;">● ML ENGINE ACTIVE</div>
+      <div class="header-actions">
+        <button class="pill-btn" onclick="exportStudentsCSV()">
+          <span>📥</span> Export 78 Students (.csv)
+        </button>
+        <button class="pill-btn" onclick="exportTeachersCSV()">
+          <span>📥</span> Export 10 Faculty (.csv)
+        </button>
+      </div>
     </header>
 
-    <div class="kpi-row">
-      <div class="kpi-card"><h3>Batch CGPA Avg</h3><div class="number" style="color:var(--cyan)">8.12 / 10</div></div>
-      <div class="kpi-card"><h3>Dean's List</h3><div class="number" style="color:var(--green)">78 Students</div></div>
-      <div class="kpi-card"><h3>Need Mentorship</h3><div class="number" style="color:var(--amber)">9 Students</div></div>
-      <div class="kpi-card"><h3>Predictive Accuracy</h3><div class="number">96.4%</div></div>
+    <!-- KPI Summary Row -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <h4>Total Cohort Enrolled</h4>
+        <div class="val" id="kpiTotal">78</div>
+      </div>
+      <div class="kpi-card">
+        <h4>Cohort Marks Average</h4>
+        <div class="val" style="color:var(--cyan)" id="kpiAvg">--</div>
+      </div>
+      <div class="kpi-card">
+        <h4>Critical Mentorship Required</h4>
+        <div class="val" style="color:var(--red)" id="kpiMentorship">--</div>
+      </div>
+      <div class="kpi-card">
+        <h4>Active Faculty Mentors</h4>
+        <div class="val" style="color:var(--green)">10 Faculty</div>
+      </div>
     </div>
 
-    <div class="app-workspace">
-      <section class="panel">
-        <h3>Student Risk Predictor</h3>
-        <input id="stuScore" type="number" class="glass-input" placeholder="Enter Internal Exam Score (0-100)" value="38" />
-        <button class="btn-liquid" onclick="runPrediction()">Evaluate Academic Intervention Index</button>
-      </section>
+    <!-- Mode Selector Tabs -->
+    <nav class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('studentView', this)">
+        <span>🎓</span> Student Mark List & Mentorship Lookup
+      </button>
+      <button class="tab-btn" onclick="switchTab('teacherPortal', this)">
+        <span>👨‍🏫</span> Faculty Allocation Portal (Search by Teacher)
+      </button>
+      <button class="tab-btn" onclick="switchTab('facultyDirectory', this)">
+        <span>📋</span> Faculty Directory & Experience (10 Mentors)
+      </button>
+    </nav>
 
-      <section class="panel">
-        <h3>Advisor Alert Stream</h3>
-        <div class="stream-feed" id="eventFeed">
-          <div>[MODEL] Assessment matrix v3.2 calibrated for Semester 6.</div>
+    <!-- ====== 1. STUDENT SEARCH & MARKS VIEW ====== -->
+    <main id="studentView" class="view-panel active">
+      <section class="glass-box">
+        <div class="section-title">
+          <h2>Student Mark List & Mentorship Engine</h2>
+          <span>Search from 78 Students by Roll No or Name</span>
+        </div>
+
+        <div class="search-row">
+          <input id="studSearchInput" class="glass-input" placeholder="Enter Student Roll No (e.g., 24CS101 - 24CS178) or Name..." value="24CS104" />
+          <button class="liquid-btn" onclick="searchStudent()">
+            <span>🔍</span> Find Student Dossier
+          </button>
+        </div>
+
+        <!-- Student Results Dossier -->
+        <div id="studentDossier" class="student-dossier">
+          
+          <!-- Left: Marks Breakdown -->
+          <div class="sub-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div>
+                <h3 id="resStudName" style="font-size:1.2rem; font-weight:800;">--</h3>
+                <p id="resStudRoll" style="color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.85rem;">--</p>
+              </div>
+              <div id="resStudAvg" style="font-size:1.6rem; font-weight:800;">--%</div>
+            </div>
+
+            <table class="marks-table">
+              <thead>
+                <tr>
+                  <th>Course Title</th>
+                  <th>Score (/100)</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody id="resMarksBody"></tbody>
+            </table>
+
+            <div id="resMentorshipBanner" class="status-banner"></div>
+          </div>
+
+          <!-- Right: Assigned Teacher Dossier -->
+          <div class="sub-card">
+            <h4 style="text-transform:uppercase; font-size:0.75rem; color:var(--text-sec); letter-spacing:0.08em;">Assigned Faculty Mentor Details</h4>
+            
+            <div style="display:flex; align-items:center; gap:14px; margin-top:8px;">
+              <div style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,var(--cyan),var(--indigo)); display:flex; align-items:center; justify-content:center; font-weight:800; color:#030712; font-size:1.3rem;" id="resFacAvatar">DR</div>
+              <div>
+                <h3 id="resFacName" style="font-size:1.1rem; font-weight:700;">--</h3>
+                <p id="resFacDesig" style="color:var(--text-sec); font-size:0.82rem;">--</p>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
+              <div style="background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:10px; border:1px solid var(--glass-border);">
+                <div style="font-size:0.72rem; color:var(--text-sec)">Experience</div>
+                <div style="font-weight:700; color:var(--cyan)" id="resFacExp">--</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:10px; border:1px solid var(--glass-border);">
+                <div style="font-size:0.72rem; color:var(--text-sec)">Cabin / Lab</div>
+                <div style="font-weight:700" id="resFacCabin">--</div>
+              </div>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.02); padding:12px; border-radius:12px; border:1px solid var(--glass-border); font-size:0.82rem;">
+              <div style="color:var(--text-sec)">Mentorship Channel</div>
+              <div id="resFacEmail" style="font-family:'JetBrains Mono',monospace; color:var(--text-pri); margin-top:4px;">--</div>
+            </div>
+          </div>
+
         </div>
       </section>
-    </div>
+    </main>
+
+    <!-- ====== 2. TEACHER SEARCH & ALLOCATED STUDENTS ====== -->
+    <main id="teacherPortal" class="view-panel">
+      <section class="glass-box">
+        <div class="section-title">
+          <h2>Faculty Mentorship Allocation Lookup</h2>
+          <span>Search any teacher to inspect all allocated student wards</span>
+        </div>
+
+        <div class="search-row">
+          <input id="teacherSearchInput" class="glass-input" placeholder="Search teacher by name (e.g. Dr. S. Ramanathan, Prof. Meera)..." value="Dr. S. Ramanathan" />
+          <button class="liquid-btn" onclick="searchTeacherAllocations()">
+            <span>🔎</span> View Allocated Students
+          </button>
+        </div>
+
+        <div id="teacherResultArea" style="display:none; flex-direction:column; gap:16px;">
+          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); border-radius:16px; padding:18px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h3 id="tAllocName" style="font-size:1.15rem; font-weight:700;">--</h3>
+              <p id="tAllocMeta" style="color:var(--cyan); font-size:0.82rem;">--</p>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.75rem; color:var(--text-sec)">Mentees Assigned</div>
+              <div id="tAllocCount" style="font-size:1.4rem; font-weight:800; color:var(--green)">--</div>
+            </div>
+          </div>
+
+          <h4 style="font-size:0.85rem; text-transform:uppercase; color:var(--text-sec); letter-spacing:0.06em;">Allocated Ward Roster</h4>
+          <div class="alloc-list" id="allocatedStudentsList"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====== 3. 10 FACULTY DIRECTORY & EXPERIENCE ====== -->
+    <main id="facultyDirectory" class="view-panel">
+      <section class="glass-box">
+        <div class="section-title">
+          <h2>Faculty Mentors Directory (10 Teachers)</h2>
+          <span>Department Mentors, Academic Background & Years of Experience</span>
+        </div>
+
+        <div class="faculty-grid" id="facultyGridList"></div>
+      </section>
+    </main>
+
   </div>
+
   <script>
-    function runPrediction() {
-      const s = parseInt(document.getElementById('stuScore').value);
-      if(isNaN(s)) return;
-      const feed = document.getElementById('eventFeed');
-      const el = document.createElement('div');
-      let status = s < 40 ? `<span style="color:#f6d365">CRITICAL RISK ➔ Mentor Scheduled</span>` : `<span style="color:#00f5a0">HEALTHY STANDING</span>`;
-      el.innerHTML = `[${new Date().toLocaleTimeString()}] Score ${s}/100 evaluated: ${status}`;
-      feed.prepend(el);
-    }
-  </script>
-</body>
-</html>
+    // ==========================================
+    // 1. DATASET: 10 FACULTY MEMBERS
+    // ==========================================
+    const teachersData = [
+      { id: "T101", name: "Dr. S. Ramanathan", designation: "Professor & Head", experience: 18, department: "Computer Science", cabin: "Block-A Cabin 301", email: "ramanathan.cs@campus.edu" },
+      { id: "T102", name: "Dr. Meera Vasudevan", designation: "Professor", experience: 15, department: "Data Science & AI", cabin: "Block-A Cabin 304", email: "meera.v@campus.edu" },
+      { id: "T103", name: "Prof. K. Soundararajan", designation: "Associate Professor", experience: 12, department: "Computer Networks", cabin: "Block-B Cabin 205", email: "soundar.k@campus.edu" },
+      { id: "T104", name: "Dr. Ananya Sengupta", designation: "Associate Professor", experience: 11, department: "Software Systems", cabin: "Block-B Cabin 210", email: "ananya.s@campus.edu" },
+      { id: "T105", name: "Prof. Rajesh Balakrishnan", designation: "Assistant Professor (Sr)", experience: 9, department: "Computer Architecture", cabin: "Block-A Cabin 112", email: "rajesh.b@campus.edu" },
+      { id: "T106", name: "Dr. Kavitha Sundaram", designation: "Assistant Professor (Sr)", experience: 8, department: "Cybersecurity", cabin: "Block-C Cabin 104", email: "kavitha.s@campus.edu" },
+      { id: "T107", name: "Prof. Manoj Kumar", designation: "Assistant Professor", experience: 6, department: "Algorithms & DS", cabin: "Block-C Cabin 108", email: "manoj.k@campus.edu" },
+      { id: "T108", name: "Prof. Priya Chandrasekar", designation: "Assistant Professor", experience: 5, department: "Machine Learning", cabin: "Block-A Cabin 202", email: "priya.c@campus.edu" },
+      { id: "T109", name: "Dr. Venkatesh Perumal", designation: "Assistant Professor", experience: 7, department: "Database Engineering", cabin: "Block-B Cabin 118", email: "venkatesh.p@campus.edu" },
+      { id: "T110", name: "Prof. Deepa Harikrishnan", designation: "Assistant Professor", experi
