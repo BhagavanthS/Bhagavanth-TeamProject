@@ -1,0 +1,11 @@
+FacultyID,FacultyName,Designation,Department,ExperienceYears,CabinLocation,EmailID
+T101,Dr. S. Ramanathan,Professor & Head,Computer Science,18,Block-A 301,ramanathan.cs@campus.edu
+T102,Dr. Meera Vasudevan,Professor,Data Science & AI,15,Block-A 304,meera.v@campus.edu
+T103,Prof. K. Soundararajan,Associate Professor,Computer Networks,12,Block-B 205,soundar.k@campus.edu
+T104,Dr. Ananya Sengupta,Associate Professor,Software Systems,11,Block-B 210,ananya.s@campus.edu
+T105,Prof. Rajesh Balakrishnan,Assistant Professor (Sr),Computer Architecture,9,Block-A 112,rajesh.b@campus.edu
+T106,Dr. Kavitha Sundaram,Assistant Professor (Sr),Cybersecurity,8,Block-C 104,kavitha.s@campus.edu
+T107,Prof. Manoj Kumar,Assistant Professor,Algorithms & DS,6,Block-C 108,manoj.k@campus.edu
+T108,Prof. Priya Chandrasekar,Assistant Professor,Machine Learning,5,Block-A 202,priya.c@campus.edu
+T109,Dr. Venkatesh Perumal,Assistant Professor,Database Engineering,7,Block-B 118,venkatesh.p@campus.edu
+T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,deepa.h@campus.edu
