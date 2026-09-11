@@ -502,656 +502,6 @@
     // 1. DATASETS
     // ==========================================
     const rawTeachersCSV = `FacultyID,FacultyName,Designation,Department,ExperienceYears,CabinLocation,EmailID
-T101,Dr. S. Ramanathan,Professor & Head,Computer Science,18,Block-A 301,ramanat      align-items: center;
-      padding: 24px 16px;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Ambient Liquid Orbs */
-    .orb-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.55; animation: floatMotion 22s infinite alternate ease-in-out; }
-    .orb-1 { width: 620px; height: 620px; background: radial-gradient(circle, #00f2fe, #4facfe); top: -200px; left: -150px; }
-    .orb-2 { width: 580px; height: 580px; background: radial-gradient(circle, #7928ca, #ff0080); bottom: -180px; right: -150px; animation-duration: 26s; }
-    .orb-3 { width: 450px; height: 450px; background: radial-gradient(circle, #00f5a0, #0072ff); top: 35%; left: 35%; animation-duration: 18s; }
-    @keyframes floatMotion {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(50px, 40px) scale(1.06); }
-    }
-
-    .app-shell { width: 100%; max-width: 1280px; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px; }
-
-    /* Glass Header */
-    .glass-header {
-      background: var(--glass-surface);
-      backdrop-filter: blur(var(--blur)) saturate(190%);
-      -webkit-backdrop-filter: blur(var(--blur)) saturate(190%);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 18px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 1px var(--glass-specular);
-    }
-    .brand-wrap { display: flex; align-items: center; gap: 14px; }
-    .brand-badge {
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--cyan), var(--indigo));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; color: #030712; font-size: 1.25rem;
-      box-shadow: 0 0 24px rgba(0, 242, 254, 0.45);
-    }
-    .brand-wrap h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
-    .brand-wrap p { font-size: 0.74rem; color: var(--text-sec); }
-    
-    .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .pill-btn {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--glass-border);
-      color: #fff;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .pill-btn:hover { background: rgba(255,255,255,0.12); border-color: var(--cyan); }
-    .file-input { display: none; }
-
-    /* KPI Summary Row */
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .kpi-card {
-      background: var(--glass-surface);
-      backdrop-filter: blur(35px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 18px 22px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .kpi-card:hover { transform: translateY(-3px); border-color: var(--glass-specular); }
-    .kpi-card h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-sec); margin-bottom: 6px; }
-    .kpi-card .val { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.03em; }
-
-    /* Tabbed Navigation */
-    .tab-bar {
-      display: flex; gap: 8px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 6px;
-      backdrop-filter: blur(25px);
-      overflow-x: auto;
-    }
-    .tab-btn {
-      flex: 1;
-      min-width: 200px;
-      padding: 12px 14px;
-      background: transparent;
-      border: none;
-      color: var(--text-sec);
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.84rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      white-space: nowrap;
-    }
-    .tab-btn.active {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-      border: 1px solid var(--glass-specular);
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-    }
-
-    /* Views */
-    .view-panel { display: none; flex-direction: column; gap: 20px; }
-    .view-panel.active { display: flex; }
-
-    .glass-box {
-      background: var(--glass-surface);
-      backdrop-filter: blur(35px);
-      border: 1px solid var(--glass-border);
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .section-title {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 18px; padding-bottom: 12px;
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .section-title h2 { font-size: 1.1rem; font-weight: 700; }
-    .section-title span { font-size: 0.74rem; color: var(--text-sec); }
-
-    /* Search Bar Layout */
-    .search-row { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
-    .glass-input {
-      flex: 1;
-      min-width: 220px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      padding: 12px 16px;
-      color: #fff;
-      font-size: 0.92rem;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .glass-input:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0,242,254,0.3); }
-    
-    .liquid-btn {
-      background: linear-gradient(135deg, var(--cyan), var(--indigo));
-      color: #030712;
-      border: none;
-      border-radius: 14px;
-      padding: 12px 24px;
-      font-weight: 800;
-      font-size: 0.88rem;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0, 242, 254, 0.35);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .liquid-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
-
-    /* Student Dossier */
-    .student-dossier {
-      display: none;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      margin-top: 10px;
-    }
-    @media(max-width: 860px) { .student-dossier { grid-template-columns: 1fr; } }
-
-    .sub-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .marks-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .marks-table th {
-      text-align: left; padding: 8px 10px; color: var(--text-sec);
-      border-bottom: 1px solid var(--glass-border); font-size: 0.72rem; text-transform: uppercase;
-    }
-    .marks-table td {
-      padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .status-banner {
-      padding: 12px 16px; border-radius: 12px; font-weight: 700; font-size: 0.82rem;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .status-danger { background: rgba(255, 82, 82, 0.12); border: 1px solid var(--red); color: #ff7676; }
-    .status-ok { background: rgba(0, 245, 160, 0.12); border: 1px solid var(--green); color: var(--green); }
-
-    /* ====== 10 TEACHER SLOTS / CARDS ====== */
-    .teacher-slots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .teacher-slot {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-    .teacher-slot:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: var(--cyan);
-      transform: translateY(-2px);
-    }
-    .teacher-slot.active {
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(79, 172, 254, 0.05));
-      border: 1px solid var(--cyan);
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
-    }
-    .teacher-slot-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .teacher-slot-num {
-      font-size: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-sec);
-      background: rgba(255,255,255,0.06);
-      padding: 2px 6px;
-      border-radius: 6px;
-    }
-    .teacher-slot-name {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #fff;
-      margin-top: 4px;
-    }
-    .teacher-slot-dept {
-      font-size: 0.74rem;
-      color: var(--cyan);
-    }
-    .teacher-slot-exp {
-      font-size: 0.72rem;
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    /* Allocated Students List */
-    .alloc-list { display: flex; flex-direction: column; gap: 8px; max-height: 420px; overflow-y: auto; }
-    .alloc-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border);
-      border-radius: 12px; font-size: 0.82rem;
-    }
-
-    /* Faculty Directory Grid */
-    .faculty-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;
-    }
-    .faculty-tile {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-      border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px;
-    }
-    .fac-exp-tag {
-      align-self: flex-start; font-size: 0.7rem; font-weight: 700; padding: 4px 8px;
-      border-radius: 8px; background: rgba(0, 242, 254, 0.12); border: 1px solid var(--cyan); color: var(--cyan);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="orb-canvas">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-
-  <div class="app-shell">
-    
-    <!-- Top Glass Header -->
-    <header class="glass-header">
-      <div class="brand-wrap">
-        <div class="brand-badge">CG</div>
-        <div>
-          <h1>CogniGrade Pro • Student Performance Suite</h1>
-          <p id="dataSourceLabel">Status: 78 Students & 10 Faculty Active</p>
-        </div>
-      </div>
-      
-      <div class="header-actions">
-        <input type="file" id="studentFileInput" class="file-input" accept=".csv" onchange="handleStudentCSV(event)" />
-        <input type="file" id="teacherFileInput" class="file-input" accept=".csv" onchange="handleTeacherCSV(event)" />
-        
-        <button class="pill-btn" onclick="document.getElementById('studentFileInput').click()">
-          <span>📂</span> Load Students CSV
-        </button>
-        <button class="pill-btn" onclick="document.getElementById('teacherFileInput').click()">
-          <span>📂</span> Load Teachers CSV
-        </button>
-        <button class="pill-btn" onclick="exportStudentsCSV()">
-          <span>📥</span> Save CSV
-        </button>
-      </div>
-    </header>
-
-    <!-- KPI Summary Row -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <h4>Total Cohort Enrolled</h4>
-        <div class="val" id="kpiTotal">78</div>
-      </div>
-      <div class="kpi-card">
-        <h4>Cohort Marks Average</h4>
-        <div class="val" style="color:var(--cyan)" id="kpiAvg">--</div>
-      </div>
-      <div class="kpi-card">
-        <h4>Mentorship Required</h4>
-        <div class="val" style="color:var(--red)" id="kpiMentorship">--</div>
-      </div>
-      <div class="kpi-card">
-        <h4>Active Faculty Mentors</h4>
-        <div class="val" style="color:var(--green)">10 Slots</div>
-      </div>
-    </div>
-
-    <!-- Mode Selector Tabs -->
-    <nav class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('studentView', this)">
-        <span>🎓</span> Student Mark List Lookup
-      </button>
-      <button class="tab-btn" onclick="switchTab('teacherPortal', this)">
-        <span>👨‍🏫</span> Faculty Allocation (10 Teacher Slots)
-      </button>
-      <button class="tab-btn" onclick="switchTab('facultyDirectory', this)">
-        <span>📋</span> Faculty Experience Directory
-      </button>
-    </nav>
-
-    <!-- ====== 1. STUDENT SEARCH & MARKS VIEW ====== -->
-    <main id="studentView" class="view-panel active">
-      <section class="glass-box">
-        <div class="section-title">
-          <h2>Student Mark List & Mentorship Engine</h2>
-          <span>Search by Roll No (e.g., 24CS101 - 24CS178) or Name</span>
-        </div>
-
-        <div class="search-row">
-          <input id="studSearchInput" class="glass-input" placeholder="Enter Roll Number or Name..." value="24CS106" />
-          <button class="liquid-btn" onclick="searchStudent()">
-            <span>🔍</span> Find Student Dossier
-          </button>
-        </div>
-
-        <!-- Student Results Dossier -->
-        <div id="studentDossier" class="student-dossier">
-          <div class="sub-card">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div>
-                <h3 id="resStudName" style="font-size:1.15rem; font-weight:800;">--</h3>
-                <p id="resStudRoll" style="color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.82rem;">--</p>
-              </div>
-              <div id="resStudAvg" style="font-size:1.5rem; font-weight:800;">--%</div>
-            </div>
-
-            <table class="marks-table">
-              <thead>
-                <tr>
-                  <th>Course Title</th>
-                  <th>Score (/100)</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody id="resMarksBody"></tbody>
-            </table>
-
-            <div id="resMentorshipBanner" class="status-banner"></div>
-          </div>
-
-          <!-- Assigned Teacher Dossier -->
-          <div class="sub-card">
-            <h4 style="text-transform:uppercase; font-size:0.72rem; color:var(--text-sec); letter-spacing:0.08em;">Assigned Faculty Mentor</h4>
-            
-            <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
-              <div style="width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,var(--cyan),var(--indigo)); display:flex; align-items:center; justify-content:center; font-weight:800; color:#030712; font-size:1.2rem;" id="resFacAvatar">DR</div>
-              <div>
-                <h3 id="resFacName" style="font-size:1.05rem; font-weight:700;">--</h3>
-                <p id="resFacDesig" style="color:var(--text-sec); font-size:0.8rem;">--</p>
-              </div>
-            </div>
-
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px;">
-              <div style="background:rgba(255,255,255,0.02); padding:8px 12px; border-radius:10px; border:1px solid var(--glass-border);">
-                <div style="font-size:0.7rem; color:var(--text-sec)">Experience</div>
-                <div style="font-weight:700; color:var(--cyan)" id="resFacExp">--</div>
-              </div>
-              <div style="background:rgba(255,255,255,0.02); padding:8px 12px; border-radius:10px; border:1px solid var(--glass-border);">
-                <div style="font-size:0.7rem; color:var(--text-sec)">Cabin / Lab</div>
-                <div style="font-weight:700" id="resFacCabin">--</div>
-              </div>
-            </div>
-
-            <div style="background:rgba(255,255,255,0.02); padding:10px 12px; border-radius:12px; border:1px solid var(--glass-border); font-size:0.8rem;">
-              <div style="color:var(--text-sec)">Mentorship Channel</div>
-              <div id="resFacEmail" style="font-family:'JetBrains Mono',monospace; color:var(--text-pri); margin-top:2px;">--</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ====== 2. 10 TEACHER SLOTS & ALLOCATED WARDS ====== -->
-    <main id="teacherPortal" class="view-panel">
-      <section class="glass-box">
-        <div class="section-title">
-          <h2>Faculty Mentorship Slots (Click any teacher slot)</h2>
-          <span>Select any of the 10 faculty mentors below to see details & all assigned students</span>
-        </div>
-
-        <!-- 10 Interactive Slots -->
-        <div class="teacher-slots-grid" id="teacherSlotsContainer"></div>
-
-        <!-- Teacher Selected Details & Students -->
-        <div id="teacherResultArea" style="display:flex; flex-direction:column; gap:16px;">
-          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); border-radius:16px; padding:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-            <div>
-              <div style="display:flex; align-items:center; gap:10px;">
-                <h3 id="tAllocName" style="font-size:1.15rem; font-weight:700;">--</h3>
-                <span id="tAllocExpBadge" style="font-size:0.72rem; padding:3px 8px; border-radius:6px; background:rgba(0,242,254,0.12); color:var(--cyan); font-weight:700;">-- Yrs Exp</span>
-              </div>
-              <p id="tAllocMeta" style="color:var(--text-sec); font-size:0.82rem; margin-top:4px;">--</p>
-              <p id="tAllocContact" style="color:#8e9bb3; font-family:'JetBrains Mono',monospace; font-size:0.75rem; margin-top:2px;">--</p>
-            </div>
-            <div style="text-align:right;">
-              <div style="font-size:0.72rem; color:var(--text-sec); text-transform:uppercase;">Assigned Wards</div>
-              <div id="tAllocCount" style="font-size:1.5rem; font-weight:800; color:var(--green)">-- Students</div>
-            </div>
-          </div>
-
-          <h4 style="font-size:0.8rem; text-transform:uppercase; color:var(--text-sec); letter-spacing:0.06em;">Allocated Students List</h4>
-          <div class="alloc-list" id="allocatedStudentsList"></div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ====== 3. 10 FACULTY DIRECTORY & EXPERIENCE ====== -->
-    <main id="facultyDirectory" class="view-panel">
-      <section class="glass-box">
-        <div class="section-title">
-          <h2>Faculty Mentors Directory (10 Teachers)</h2>
-          <span>Department Mentors, Academic Background & Years of Experience</span>
-        </div>
-
-        <div class="faculty-grid" id="facultyGridList"></div>
-      </section>
-    </main>
-
-  </div>
-
-  <script>
-    // ==========================================
-    // 1. DATASETS
-    // ==========================================
-    const rawTeachersCSV = `FacultyID,FacultyName,Designation,Department,ExperienceYears,CabinLocation,EmailID
-T101,Dr. S. Ramanathan,Professor & Head,Computer Science,18,Block-A 301,ramanathan.cs@campus.edu
-T102,Dr. Meera v>
-          <h1>CogniGrade Pro • Student Performance Suite</h1>
-          <p id="dataSourceLabel">Status: Synced with Dataset</p>
-        </div>
-      </div>
-      
-      <!-- Actions: Load CSV or Re-Export -->
-      <div class="header-actions">
-        <!-- Hidden file inputs to pick CSV from mobile -->
-        <input type="file" id="studentFileInput" class="file-input" accept=".csv" onchange="handleStudentCSV(event)" />
-        <input type="file" id="teacherFileInput" class="file-input" accept=".csv" onchange="handleTeacherCSV(event)" />
-        
-        <button class="pill-btn" onclick="document.getElementById('studentFileInput').click()">
-          <span>📂</span> Load Students CSV
-        </button>
-        <button class="pill-btn" onclick="document.getElementById('teacherFileInput').click()">
-          <span>📂</span> Load Teachers CSV
-        </button>
-        <button class="pill-btn" onclick="exportStudentsCSV()">
-          <span>📥</span> Save CSV
-        </button>
-      </div>
-    </header>
-
-    <!-- KPI Summary Row -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <h4>Total Cohort Enrolled</h4>
-        <div class="val" id="kpiTotal">78</div>
-      </div>
-      <div class="kpi-card">
-        <h4>Cohort Marks Average</h4>
-        <div class="val" style="color:var(--cyan)" id="kpiAvg">--</div>
-      </div>
-      <div class="kpi-card">
-        <h4>Mentorship Required</h4>
-        <div class="val" style="color:var(--red)" id="kpiMentorship">--</div>
-      </div>
-      <div class="kpi-card">
-        <h4>Active Faculty Mentors</h4>
-        <div class="val" style="color:var(--green)" id="kpiTeachers">10 Faculty</div>
-      </div>
-    </div>
-
-    <!-- Mode Selector Tabs -->
-    <nav class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('studentView', this)">
-        <span>🎓</span> Student Mark List Lookup
-      </button>
-      <button class="tab-btn" onclick="switchTab('teacherPortal', this)">
-        <span>👨‍🏫</span> Faculty Allocation Portal
-      </button>
-      <button class="tab-btn" onclick="switchTab('facultyDirectory', this)">
-        <span>📋</span> Faculty Directory & Experience
-      </button>
-    </nav>
-
-    <!-- ====== 1. STUDENT SEARCH & MARKS VIEW ====== -->
-    <main id="studentView" class="view-panel active">
-      <section class="glass-box">
-        <div class="section-title">
-          <h2>Student Mark List & Mentorship Engine</h2>
-          <span>Search by Roll No (e.g., 24CS101 - 24CS178) or Name</span>
-        </div>
-
-        <div class="search-row">
-          <input id="studSearchInput" class="glass-input" placeholder="Enter Roll Number or Name..." value="24CS106" />
-          <button class="liquid-btn" onclick="searchStudent()">
-            <span>🔍</span> Find Student Dossier
-          </button>
-        </div>
-
-        <!-- Student Results Dossier -->
-        <div id="studentDossier" class="student-dossier">
-          <div class="sub-card">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div>
-                <h3 id="resStudName" style="font-size:1.15rem; font-weight:800;">--</h3>
-                <p id="resStudRoll" style="color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.82rem;">--</p>
-              </div>
-              <div id="resStudAvg" style="font-size:1.5rem; font-weight:800;">--%</div>
-            </div>
-
-            <table class="marks-table">
-              <thead>
-                <tr>
-                  <th>Course Title</th>
-                  <th>Score (/100)</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody id="resMarksBody"></tbody>
-            </table>
-
-            <div id="resMentorshipBanner" class="status-banner"></div>
-          </div>
-
-          <!-- Assigned Teacher Dossier -->
-          <div class="sub-card">
-            <h4 style="text-transform:uppercase; font-size:0.72rem; color:var(--text-sec); letter-spacing:0.08em;">Assigned Faculty Mentor</h4>
-            
-            <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
-              <div style="width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,var(--cyan),var(--indigo)); display:flex; align-items:center; justify-content:center; font-weight:800; color:#030712; font-size:1.2rem;" id="resFacAvatar">DR</div>
-              <div>
-                <h3 id="resFacName" style="font-size:1.05rem; font-weight:700;">--</h3>
-                <p id="resFacDesig" style="color:var(--text-sec); font-size:0.8rem;">--</p>
-              </div>
-            </div>
-
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px;">
-              <div style="background:rgba(255,255,255,0.02); padding:8px 12px; border-radius:10px; border:1px solid var(--glass-border);">
-                <div style="font-size:0.7rem; color:var(--text-sec)">Experience</div>
-                <div style="font-weight:700; color:var(--cyan)" id="resFacExp">--</div>
-              </div>
-              <div style="background:rgba(255,255,255,0.02); padding:8px 12px; border-radius:10px; border:1px solid var(--glass-border);">
-                <div style="font-size:0.7rem; color:var(--text-sec)">Cabin / Lab</div>
-                <div style="font-weight:700" id="resFacCabin">--</div>
-              </div>
-            </div>
-
-            <div style="background:rgba(255,255,255,0.02); padding:10px 12px; border-radius:12px; border:1px solid var(--glass-border); font-size:0.8rem;">
-              <div style="color:var(--text-sec)">Mentorship Channel</div>
-              <div id="resFacEmail" style="font-family:'JetBrains Mono',monospace; color:var(--text-pri); margin-top:2px;">--</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ====== 2. TEACHER SEARCH & ALLOCATED STUDENTS ====== -->
-    <main id="teacherPortal" class="view-panel">
-      <section class="glass-box">
-        <div class="section-title">
-          <h2>Faculty Mentorship Allocation Lookup</h2>
-          <span>Search any teacher to inspect all allocated student wards</span>
-        </div>
-
-        <div class="search-row">
-          <input id="teacherSearchInput" class="glass-input" placeholder="Search teacher by name (e.g. Dr. S. Ramanathan, Dr. Meera)..." value="Dr. S. Ramanathan" />
-          <button class="liquid-btn" onclick="searchTeacherAllocations()">
-            <span>🔎</span> View Allocated Students
-          </button>
-        </div>
-
-        <div id="teacherResultArea" style="display:none; flex-direction:column; gap:14px;">
-          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); border-radius:16px; padding:16px; display:flex; justify-content:space-between; align-items:center;">
-            <div>
-              <h3 id="tAllocName" style="font-size:1.1rem; font-weight:700;">--</h3>
-              <p id="tAllocMeta" style="color:var(--cyan); font-size:0.8rem;">--</p>
-            </div>
-            <div style="text-align:right;">
-              <div style="font-size:0.72rem; color:var(--text-sec)">Mentees Assigned</div>
-              <div id="tAllocCount" style="font-size:1.3rem; font-weight:800; color:var(--green)">--</div>
-            </div>
-          </div>
-
-          <h4 style="font-size:0.8rem; text-transform:uppercase; color:var(--text-sec); letter-spacing:0.06em;">Allocated Ward Roster</h4>
-          <div class="alloc-list" id="allocatedStudentsList"></div>
-        </div>
-      </section>
-    </main>
-
-    <!-- ====== 3. 10 FACULTY DIRECTORY & EXPERIENCE ====== -->
-    <main id="facultyDirectory" class="view-panel">
-      <section class="glass-box">
-        <div class="section-title">
-          <h2>Faculty Mentors Directory (10 Teachers)</h2>
-          <span>Department Mentors, Academic Background & Years of Experience</span>
-        </div>
-
-        <div class="faculty-grid" id="facultyGridList"></div>
-      </section>
-    </main>
-
-  </div>
-
-  <script>
-    // =========================================================================
-    // 1. EMBEDDED CSV FALLBACK (Exact duplicate of your saved CSV files)
-    // =========================================================================
-    const rawTeachersCSV = `FacultyID,FacultyName,Designation,Department,ExperienceYears,CabinLocation,EmailID
 T101,Dr. S. Ramanathan,Professor & Head,Computer Science,18,Block-A 301,ramanathan.cs@campus.edu
 T102,Dr. Meera Vasudevan,Professor,Data Science & AI,15,Block-A 304,meera.v@campus.edu
 T103,Prof. K. Soundararajan,Associate Professor,Computer Networks,12,Block-B 205,soundar.k@campus.edu
@@ -1243,13 +593,10 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
 24CS177,Vivek Z.,92,94,90,96,93,93.0,0,NO,T107,Prof. Manoj Kumar
 24CS178,Yuvan A.,30,35,43,31,48,37.4,3,YES,T108,Prof. Priya Chandrasekar`;
 
-    // Data Stores
     let studentsData = [];
     let teachersData = [];
+    let selectedTeacherId = "T101";
 
-    // =========================================================================
-    // 2. CSV PARSERS
-    // =========================================================================
     function parseCSVLine(text) {
       const result = [];
       let cur = '';
@@ -1301,13 +648,7 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
         parsed.push({
           rollNo: cols[0],
           name: cols[1],
-          marks: {
-            "Mathematics": m1,
-            "Data Structures": m2,
-            "Computer Networks": m3,
-            "Database Systems": m4,
-            "Operating Systems": m5
-          },
+          marks: { "Mathematics": m1, "Data Structures": m2, "Computer Networks": m3, "Database Systems": m4, "Operating Systems": m5 },
           average: avg,
           fails: fails,
           needsMentorship: needsMentorship,
@@ -1318,47 +659,33 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       return parsed;
     }
 
-    // =========================================================================
-    // 3. AUTOMATIC CSV INGESTION & LOADERS
-    // =========================================================================
     async function loadDataset() {
-      // 1. Load initial fallback
       teachersData = parseTeachersCSV(rawTeachersCSV);
       studentsData = parseStudentsCSV(rawStudentsCSV);
 
-      // 2. Try fetching the actual CSV files from the sibling folder if hosted on a web server (e.g. GitHub Pages)
       try {
         const studentResp = await fetch('../02-Excel-Analysis/Team06_StudentPerformance_ExcelAnalysis_Final.csv');
         if (studentResp.ok) {
-          const sText = await studentResp.text();
-          studentsData = parseStudentsCSV(sText);
-          document.getElementById('dataSourceLabel').innerText = "Status: Synced with Student CSV File";
+          studentsData = parseStudentsCSV(await studentResp.text());
         }
-      } catch (e) {
-        // Fallback remains active
-      }
+      } catch (e) {}
 
       try {
         const teacherResp = await fetch('../02-Excel-Analysis/Team06_FacultyDirectory_ExcelAnalysis_Final.csv');
         if (teacherResp.ok) {
-          const tText = await teacherResp.text();
-          teachersData = parseTeachersCSV(tText);
+          teachersData = parseTeachersCSV(await teacherResp.text());
         }
-      } catch (e) {
-        // Fallback remains active
-      }
+      } catch (e) {}
 
       refreshAllViews();
     }
 
-    // Handlers for picking local files from phone
     function handleStudentCSV(event) {
       const file = event.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(e) {
         studentsData = parseStudentsCSV(e.target.result);
-        document.getElementById('dataSourceLabel').innerText = `Status: Loaded ${file.name}`;
         refreshAllViews();
       };
       reader.readAsText(file);
@@ -1370,14 +697,12 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       const reader = new FileReader();
       reader.onload = function(e) {
         teachersData = parseTeachersCSV(e.target.result);
-        document.getElementById('dataSourceLabel').innerText = `Status: Loaded ${file.name}`;
         refreshAllViews();
       };
       reader.readAsText(file);
     }
 
     function refreshAllViews() {
-      // Refresh KPI
       let sumAvg = 0;
       let mentorCount = 0;
       studentsData.forEach(s => {
@@ -1387,16 +712,13 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       document.getElementById('kpiTotal').innerText = studentsData.length;
       document.getElementById('kpiAvg').innerText = (studentsData.length ? (sumAvg / studentsData.length).toFixed(1) : 0) + '%';
       document.getElementById('kpiMentorship').innerText = `${mentorCount} Students`;
-      document.getElementById('kpiTeachers').innerText = `${teachersData.length} Faculty`;
 
+      renderTeacherSlots();
+      selectTeacherSlot(selectedTeacherId);
       renderFacultyDirectory();
       searchStudent();
-      searchTeacherAllocations();
     }
 
-    // =========================================================================
-    // 4. TAB NAVIGATION
-    // =========================================================================
     function switchTab(viewId, btnElem) {
       document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1405,8 +727,81 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
     }
 
     // =========================================================================
-    // 5. STUDENT SEARCH & DOSSIER
+    // 2. RENDER 10 TEACHER NAME TILES (Direct click tiles)
     // =========================================================================
+    function renderTeacherSlots() {
+      const container = document.getElementById('teacherSlotsContainer');
+      container.innerHTML = '';
+
+      teachersData.forEach((t, idx) => {
+        const slot = document.createElement('div');
+        slot.className = `teacher-slot ${t.id === selectedTeacherId ? 'active' : ''}`;
+        slot.id = `slot-${t.id}`;
+        slot.onclick = () => selectTeacherSlot(t.id);
+
+        slot.innerHTML = `
+          <div class="teacher-slot-header">
+            <span class="teacher-slot-badge">FACULTY #${idx + 1}</span>
+            <span class="teacher-slot-exp">${t.experience} Yrs</span>
+          </div>
+          <div class="teacher-slot-name">${t.name}</div>
+          <div class="teacher-slot-dept">${t.department}</div>
+        `;
+        container.appendChild(slot);
+      });
+    }
+
+    // =========================================================================
+    // 3. SELECT TEACHER SLOT & SHOW WARDS DIRECTLY
+    // =========================================================================
+    function selectTeacherSlot(teacherId) {
+      selectedTeacherId = teacherId;
+
+      document.querySelectorAll('.teacher-slot').forEach(el => el.classList.remove('active'));
+      const activeSlot = document.getElementById(`slot-${teacherId}`);
+      if (activeSlot) activeSlot.classList.add('active');
+
+      const teacher = teachersData.find(t => t.id === teacherId) || teachersData[0];
+      if (!teacher) return;
+
+      document.getElementById('tAllocName').innerText = teacher.name;
+      document.getElementById('tAllocExpBadge').innerText = `${teacher.experience} Yrs Experience`;
+      document.getElementById('tAllocMeta').innerText = `${teacher.designation} • Department of ${teacher.department}`;
+      document.getElementById('tAllocContact').innerText = `📍 Cabin: ${teacher.cabin}  |  ✉️ ${teacher.email}`;
+
+      const allocated = studentsData.filter(s => s.mentorId === teacher.id || s.mentorName === teacher.name);
+      document.getElementById('tAllocCount').innerText = `${allocated.length} Students`;
+
+      const listContainer = document.getElementById('allocatedStudentsList');
+      listContainer.innerHTML = '';
+
+      if (allocated.length === 0) {
+        listContainer.innerHTML = `<div style="padding:16px; color:var(--text-sec); font-size:0.85rem;">No students currently assigned to this mentor.</div>`;
+        return;
+      }
+
+      allocated.forEach(st => {
+        const row = document.createElement('div');
+        row.className = 'alloc-row';
+        row.innerHTML = `
+          <div>
+            <span style="font-weight:700; color:#fff">${st.name}</span>
+            <span style="color:var(--cyan); margin-left:8px; font-family:'JetBrains Mono',monospace;">(${st.rollNo})</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span>Average: <b>${st.average}%</b></span>
+            <span style="padding:4px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; ${st.needsMentorship ? 'background:rgba(255,82,82,0.15); color:#ff5252;' : 'background:rgba(0,245,160,0.15); color:#00f5a0;'}">
+              ${st.needsMentorship ? '⚠️ MENTORSHIP REQUIRED' : 'NORMAL'}
+            </span>
+          </div>
+        `;
+        listContainer.appendChild(row);
+      });
+    }
+
+    // ==========================================
+    // 4. STUDENT SEARCH
+    // ==========================================
     function searchStudent() {
       const query = document.getElementById('studSearchInput').value.trim().toLowerCase();
       if (!query) return;
@@ -1416,14 +811,12 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       );
 
       const dossier = document.getElementById('studentDossier');
-
       if (!student) {
         dossier.style.display = 'none';
         return;
       }
 
       dossier.style.display = 'grid';
-
       document.getElementById('resStudName').innerText = student.name;
       document.getElementById('resStudRoll').innerText = `ROLL: ${student.rollNo}`;
       document.getElementById('resStudAvg').innerText = `${student.average}%`;
@@ -1445,7 +838,7 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       const banner = document.getElementById('resMentorshipBanner');
       if (student.needsMentorship) {
         banner.className = 'status-banner status-danger';
-        banner.innerHTML = `⚠️ <b>CRITICAL MENTORSHIP REQUIRED</b> — ${student.fails} Arrear(s) / Score below 50%. Remedial sessions mandated.`;
+        banner.innerHTML = `⚠️ <b>CRITICAL MENTORSHIP REQUIRED</b> — ${student.fails} Arrear(s) / Score below 50%. Remedial counseling mandated.`;
       } else {
         banner.className = 'status-banner status-ok';
         banner.innerHTML = `✅ <b>HEALTHY ACADEMIC STANDING</b> — Student does not require mandatory mentorship.`;
@@ -1467,55 +860,9 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       document.getElementById('resFacEmail').innerText = mentor.email;
     }
 
-    // =========================================================================
-    // 6. TEACHER SEARCH & ALLOCATED WARDS
-    // =========================================================================
-    function searchTeacherAllocations() {
-      const q = document.getElementById('teacherSearchInput').value.trim().toLowerCase();
-      if (!q) return;
-
-      const teacher = teachersData.find(t => 
-        t.name.toLowerCase().includes(q) || t.id.toLowerCase() === q
-      );
-
-      const resArea = document.getElementById('teacherResultArea');
-      if (!teacher) {
-        resArea.style.display = 'none';
-        return;
-      }
-
-      resArea.style.display = 'flex';
-      document.getElementById('tAllocName').innerText = teacher.name;
-      document.getElementById('tAllocMeta').innerText = `${teacher.designation} • ${teacher.experience} Yrs Exp • ${teacher.cabin}`;
-
-      const allocated = studentsData.filter(s => s.mentorId === teacher.id || s.mentorName === teacher.name);
-      document.getElementById('tAllocCount').innerText = `${allocated.length} Students`;
-
-      const listContainer = document.getElementById('allocatedStudentsList');
-      listContainer.innerHTML = '';
-
-      allocated.forEach(st => {
-        const row = document.createElement('div');
-        row.className = 'alloc-row';
-        row.innerHTML = `
-          <div>
-            <span style="font-weight:700; color:#fff">${st.name}</span>
-            <span style="color:var(--cyan); margin-left:8px; font-family:'JetBrains Mono',monospace;">(${st.rollNo})</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:12px;">
-            <span>Avg: <b>${st.average}%</b></span>
-            <span style="padding:4px 8px; border-radius:6px; font-size:0.75rem; font-weight:700; ${st.needsMentorship ? 'background:rgba(255,82,82,0.15); color:#ff5252;' : 'background:rgba(0,245,160,0.15); color:#00f5a0;'}">
-              ${st.needsMentorship ? 'MENTORSHIP REQUIRED' : 'NORMAL'}
-            </span>
-          </div>
-        `;
-        listContainer.appendChild(row);
-      });
-    }
-
-    // =========================================================================
-    // 7. FACULTY DIRECTORY RENDER
-    // =========================================================================
+    // ==========================================
+    // 5. FACULTY DIRECTORY RENDER
+    // ==========================================
     function renderFacultyDirectory() {
       const grid = document.getElementById('facultyGridList');
       grid.innerHTML = '';
@@ -1536,9 +883,9 @@ T110,Prof. Deepa Harikrishnan,Assistant Professor,Cloud Computing,4,Block-C 202,
       });
     }
 
-    // =========================================================================
-    // 8. CSV EXPORT
-    // =========================================================================
+    // ==========================================
+    // 6. CSV EXPORT
+    // ==========================================
     function exportStudentsCSV() {
       let csv = "RollNo,StudentName,Mathematics,DataStructures,ComputerNetworks,DatabaseSystems,OperatingSystems,AverageScore,ArrearsCount,NeedsMentorship,MentorID,AssignedMentorName\n";
       studentsData.forEach(s => {
